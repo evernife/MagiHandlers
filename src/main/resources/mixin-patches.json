@@ -1,12 +1,12 @@
 [
   {
     "name": "Botania",
-    "file": "Botania-r1.8-249.jar",
+    "modid": "botania",
     "mixin": "mixins/mixin-botania.json"
   },
   {
     "name": "OpenBlocks",
-    "file": "OpenBlocks-1.7.10-1.6.jar",
+    "modid": "openblocks",
     "mixin": "mixins/mixin-openblocks.json"
   },
   {
@@ -26,57 +26,57 @@
   },
   {
     "name": "ThaumicEnergisitcs",
-    "file": "thaumicenergistics-1.0.0.5.jar",
+    "modid": "thaumicenergistics",
     "mixin": "mixins/mixin-tenergistics.json"
   },
   {
     "name": "ExtraUtilities",
-    "file": "extrautilities-1.2.12.jar",
+    "modid": "extrautilities",
     "mixin": "mixins/mixin-extrautilities.json"
   },
   {
     "name": "COFHCore",
-    "file": "CoFHCore-[1.7.10]3.1.4-329.jar",
+    "modid": "cofhcore",
     "mixin": "mixins/mixin-cofhcore.json"
   },
   {
     "name": "BloodMagic",
-    "file": "BloodMagic-1.7.10-1.3.3-17.jar",
+    "modid": "awwayoftime",
     "mixin": "mixins/mixin-bloodmagic.json"
   },
   {
     "name": "Avaritia",
-    "file": "Avaritia-1.11.jar",
+    "modid": "avaritia",
     "mixin": "mixins/mixin-avaritia.json"
   },
   {
     "name": "Thaumcraft",
-    "file": "Thaumcraft-1.7.10-4.2.3.5.jar",
+    "modid": "thaumcraft",
     "mixin": "mixins/mixin-thaumcraft.json"
   },
   {
     "name": "Thermal Expansion",
-    "file": "ThermalExpansion-[1.7.10]4.1.5-248.jar",
+    "modid": "thermalexpansion",
     "mixin": "mixins/mixin-thermalexpansion.json"
   },
   {
     "name": "MineFactory Reloaded",
-    "file": "MineFactoryReloaded-[1.7.10]2.8.2B1-201.jar",
+    "modid": "minefactoryreloaded",
     "mixin": "mixins/mixin-mfr.json"
   },
   {
     "name": "EnderIO",
-    "file": "EnderIO-1.7.10-2.3.0.429_beta.jar",
+    "modid": "enderio",
     "mixin": "mixins/mixin-enderio.json"
   },
   {
     "name": "ExCompressum",
-    "file": "excompressum-mc1.7.10-1.1.149.jar",
+    "modid": "excompressum",
     "mixin": "mixins/mixin-excompressum.json"
   },
   {
     "name": "Tinkers Construct",
-    "file": "TConstruct-1.7.10-1.8.8.jar",
+    "modid": "tconstruct",
     "mixin": "mixins/mixin-tconstruct.json"
   },
   {
@@ -86,7 +86,7 @@
   },
   {
     "name": "IC2",
-    "file": "industrialcraft-2-2.2.827-experimental.jar",
+    "modid": "ic2",
     "mixin": "mixins/mixin-ic2.json"
   },
   {
@@ -96,27 +96,27 @@
   },
   {
     "name": "BetterQuesting",
-    "file": "BetterQuesting-2.0.233.jar",
+    "modid": "betterquesting",
     "mixin": "mixins/mixin-betterquesting.json"
   },
   {
     "name": "Chisel",
-    "file": "Chisel-2.9.5.11.jar",
+    "modid": "chisel",
     "mixin": "mixins/mixin-chisel.json"
   },
   {
     "name": "ThaumicTinkerer",
-    "file": "ThaumicTinkerer-2.5-1.7.10-164.jar",
+    "modid": "thaumictinkerer",
     "mixin": "mixins/mixin-thaumictinkerer.json"
   },
   {
     "name": "ExAstris",
-    "file": "Ex-Astris-MC1.7.10-1.16-36.jar",
+    "modid": "exastris",
     "mixin": "mixins/mixin-exastris.json"
   },
   {
     "name": "IguanaTinkerTweaks",
-    "file": "IguanaTinkerTweaks-1.7.10-2.1.6.jar",
+    "modid": "iguanatweakstconstruct",
     "mixin": "mixins/mixin-iguanatt.json"
   },
   {
@@ -126,7 +126,7 @@
   },
   {
     "name": "MagicalCrops",
-    "file": "magicalcrops-4.0.0_PUBLIC_BETA_5.jar",
+    "modid": "magicalcrops",
     "mixin": "mixins/mixin-magicalcrops.json"
   },
   {
@@ -146,12 +146,12 @@
   },
   {
     "name": "Immersive Engineering",
-    "file": "ImmersiveEngineering-0.7.7.jar",
+    "modid": "immersiveengineering",
     "mixin": "mixins/mixin-ie.json"
   },
   {
     "name": "Applied Energistics 2",
-    "file": "ae2.jar",
+    "modid": "appliedenergistics2",
     "mixin": "mixins/mixin-ae2.json"
   },
   {
@@ -166,7 +166,7 @@
   },
   {
     "name": "WorldEdit",
-    "file": "worldedit-forge-mc1.7.10-6.1.1-dist.jar",
+    "modid": "worldedit",
     "mixin": "mixins/mixin-worldedit.json"
   }
 ]

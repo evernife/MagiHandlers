@@ -5,13 +5,19 @@ import com.google.gson.Gson;
 import cpw.mods.fml.relauncher.CoreModManager;
 import net.minecraft.launchwrapper.LaunchClassLoader;
 import org.apache.logging.log4j.LogManager;
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
 import org.spongepowered.asm.mixin.MixinEnvironment;
 import org.spongepowered.asm.mixin.Mixins;
 
 import java.io.File;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.nio.charset.Charset;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
+import java.util.zip.ZipEntry;
+import java.util.zip.ZipFile;
 
 /**
  * The MIT License (MIT)
@@ -42,6 +48,54 @@ public class PathLoader {
     private final static File modFolder = new File("mods");
     private List<String> loadedPatches = new ArrayList<>();
 
+    private Map<String,File> getInstalledMods(){
+        Map<String,File> mapOfMods = new HashMap<String,File>();
+
+        for (File aModFile : modFolder.listFiles()) {
+            if (aModFile.isDirectory() || !aModFile.getName().endsWith(".jar")){
+                continue;
+            }
+            try {
+                ZipFile zipFile = new ZipFile(aModFile);
+
+                Enumeration<? extends ZipEntry> entries = zipFile.entries();
+                ZipEntry mcModInfo = null;
+
+                while (entries.hasMoreElements()) {
+                    ZipEntry entry = entries.nextElement();
+                    if (entry.getName().equals("mcmod.info")) {
+                        mcModInfo = entry;
+                        break;
+                    }
+                }
+
+                String modID;
+                if (mcModInfo != null) {
+                    try {
+                        InputStream inputStream = zipFile.getInputStream(mcModInfo);
+                        JSONParser jsonParser = new JSONParser();
+                        JSONArray jsonArray = (JSONArray) jsonParser.parse(
+                                new InputStreamReader(inputStream, "UTF-8"));
+                        JSONObject jsonObject = (JSONObject) jsonArray.get(0);
+                        modID = ((String) jsonObject.get("modid")).toLowerCase();
+                        zipFile.close();
+                    }catch (Exception e){
+                        modID = null;
+                    }
+                } else {
+                    modID = null;
+                }
+
+                if (modID != null){
+                    mapOfMods.put(modID,aModFile);
+                }
+            }catch(Exception ignored){
+
+            }
+        }
+        return mapOfMods;
+    }
+
     public void loadPatches() throws Exception{
         boolean isThermos = false;
         try {
@@ -49,12 +103,13 @@ public class PathLoader {
             isThermos = true;
         } catch (Exception e) {}
 
+        Map<String,File> mapOfInstalledMods = getInstalledMods();
         if (!isThermos) {
             MixinEnvironment.getDefaultEnvironment().addConfiguration("mixins/mixin-forge.json");
             Patch[] patches = gson.fromJson(Resources.toString(Resources.getResource("mixin-patches.json"), Charset.forName("UTF-8")), Patch[].class);
             for (Patch patch : patches) {
-                File modfile = new File(modFolder, patch.getFile());
-                if (modfile.exists()) {
+                File modfile = patch.getModid().isEmpty() ? new File(modFolder, patch.getFile()) : mapOfInstalledMods.get(patch.getModid().toLowerCase());
+                if (modfile != null && modfile.exists()) {
                     loadModJar(modfile);
                     MixinEnvironment.getDefaultEnvironment().addConfiguration(patch.getMixin());
                     LogManager.getLogger().info("[MagiHandlers] Applying " + patch.getMixin() + " to " + patch.getName());
@@ -65,8 +120,8 @@ public class PathLoader {
             Mixins.addConfiguration("mixins/mixin-forge.json");
             Patch[] patches = gson.fromJson(Resources.toString(Resources.getResource("mixin-patches.json"), Charset.forName("UTF-8")), Patch[].class);
             for (Patch patch : patches) {
-                File modfile = new File(modFolder, patch.getFile());
-                if (modfile.exists()) {
+                File modfile = patch.getModid().isEmpty() ? new File(modFolder, patch.getFile()) : mapOfInstalledMods.get(patch.getModid().toLowerCase());
+                if (modfile != null && modfile.exists()) {
                     loadModJar(modfile);
                     Mixins.addConfiguration(patch.getMixin());
                     LogManager.getLogger().info("[MagiHandlers] Applying " + patch.getMixin() + " to " + patch.getName());

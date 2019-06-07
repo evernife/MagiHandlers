@@ -1,5 +1,7 @@
 package net.heyzeer0.mgh.loader;
 
+import org.luaj.vm2.ast.Str;
+
 /**
  * The MIT License (MIT)
  *
@@ -27,20 +29,33 @@ public class Patch {
 
     private String name;
     private String file;
+    private String modid;
     private String mixin;
 
     public Patch(String name, String file, String mixin) {
         this.name = name;
         this.file = file;
         this.mixin = mixin;
+        this.modid = "";
+    }
+
+    public Patch(String name, String file, String mixin, String modid) {
+        this.name = name;
+        this.file = file;
+        this.mixin = mixin;
+        this.modid = modid;
     }
 
     public String getName() {
-        return name;
+        return name != null ? name : "";
     }
 
     public String getFile() {
-        return file;
+        return file != null ? file : "";
+    }
+
+    public String getModid() {
+        return modid != null ? modid : "";
     }
 
     public String getMixin() {
@@ -52,6 +67,7 @@ public class Patch {
         return "Patch{" +
                 "name='" + name + '\'' +
                 ", file='" + file + '\'' +
+                ", modid='" + modid + '\'' +
                 ", mixin='" + mixin + '\'' +
                 '}';
     }
