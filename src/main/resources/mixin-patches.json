@@ -95,11 +95,6 @@
     "mixin": "mixins/mixin-buildcraft.json"
   },
   {
-    "name": "BetterQuesting",
-    "modid": "betterquesting",
-    "mixin": "mixins/mixin-betterquesting.json"
-  },
-  {
     "name": "Chisel",
     "modid": "chisel",
     "mixin": "mixins/mixin-chisel.json"
