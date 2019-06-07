@@ -4,6 +4,7 @@
   "mixins":[
     "MixinItemHelper",
     "MixinCoFHFakePlayer",
+    "MixinHooksCore",
     "MixinSecurityHelper"
   ],
   "server": [],

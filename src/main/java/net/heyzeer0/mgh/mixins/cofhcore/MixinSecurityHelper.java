@@ -6,6 +6,8 @@ import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Overwrite;
 import org.spongepowered.asm.mixin.Pseudo;
 
+import java.util.HashMap;
+import java.util.Map;
 import java.util.UUID;
 
 /**
@@ -16,10 +18,14 @@ import java.util.UUID;
 @Mixin(targets = "cofh/lib/util/helpers/SecurityHelper", remap = false)
 public abstract class MixinSecurityHelper {
 
+    private static final Map<UUID,GameProfile> cachedGameProfileMap = new HashMap<UUID, GameProfile>();
     @Overwrite
     public static GameProfile getProfile(UUID uuid, String name) {
         GameProfile owner = null;
-        try{
+        try {
+            if (cachedGameProfileMap.containsKey(uuid)){
+                return cachedGameProfileMap.get(uuid);
+            }
             owner = MinecraftServer.getServer().func_152358_ax().func_152652_a(uuid);
             if (owner == null) {
                 GameProfile temp = new GameProfile(uuid, name);
@@ -28,7 +34,8 @@ public abstract class MixinSecurityHelper {
                     MinecraftServer.getServer().func_152358_ax().func_152649_a(owner);
                 }
             }
-        }catch (Exception ignored) {}
+            cachedGameProfileMap.put(uuid,owner);
+        }catch (Exception ignored){}
         return owner;
     }
 }
